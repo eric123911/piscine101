@@ -1,75 +1,62 @@
-/* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_sort_params.c                                 .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: eschnell <marvin@le-101.fr>                +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/10 14:48:43 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/10 16:49:51 by eschnell    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
-/* ************************************************************************** */
+int ft_putchar(char c);
 
-
-void		ft_putchar(char c);
-
-void		ft_putstr(char *str)
+void ft_putstr(char *str)
 {
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
+  while (*str)
+    {
+      ft_putchar(*str);
+      str++;
+    }
 }
 
-int			ft_strcmp(char *s1, char *s2)
+void print_argv(int argc, char **argv)
 {
-	int		i;
+  int i;
 
-	i = 0;
-	while (s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+  i = 1;
+  while (i < argc)
+    {
+      ft_putstr(argv[i]);
+      ft_putchar('\n');
+      i++;
+    }
 }
 
-int			main(int argc, char **argv)
+int ft_strcmp(char *s1, char *s2)
 {
-	int		i;
-	int		tampon;
-	char	*temp;
+  while (*s1 && s2 && *s1 == *s2)
+    {
+      s1++;
+      s2++;
+    }
+  if (!*s1)
+    return (0);
+  return (*s1 - *s2);
+}
 
-	tampon = 1;
-	/*
-	while (tampon)
+int main(int argc, char **argv)
+{
+  int i;
+  int j;
+  char *temp;
+
+  i = 1;
+  j = 1;
+  while (i < argc)
+    {
+      j = 1;
+      while (j < argc - 1)
 	{
-		i = 0;
-		tampon = 1;
-		*/
-	i = 0;
-		while (i++ < argc - 1)
-		{
-			if (ft_strcmp(argv[i], argv[i + 1]) > 0)
-			{
-				//tampon = 1;
-				temp = argv[i + 1];
-				argv[i + 1] = argv[i];
-				argv[i] = temp;
-				tampon = 1;
-			}
-		}
-		/*
+	  if (cmp(argv[j], argv[j + 1]) > 0)
+	    {
+	      temp = argv[j];
+	      argv[j] = argv[j + 1];
+	      argv[j + 1] = temp;
+	    }
+	  j++;
 	}
-	*/
-	i = 0;
-	while (i++ < argc)
-	{
-		ft_putstr(argv[i]);
-		ft_putchar('\n');
-		//i++;
-	}
-	return (0);
+      i++;
+    }
+  print_argv(argc, argv);
+  return (0);
 }
