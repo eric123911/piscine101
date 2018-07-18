@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main_main.c                                      .::    .:/ .      .::   */
+/*   main.h                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: eschnell <eschnell@student.le-101.>        +:+   +:    +:    +:+     */
+/*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/11 14:54:06 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/11 14:56:33 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/18 13:38:28 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/18 15:48:45 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <>
-
-int		main(int argc, char **argv)
-{
-	if (argc != X)
-		return (0);
-	printf("%", );
-	return (0);
-}
+#ifndef MAIN_H
+# define MAIN_H
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/uio.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <errno.h>
+# define BUF_SIZE 1
+#endif
