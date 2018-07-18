@@ -24,27 +24,24 @@ void	ft_putstr(char *str)
 	write(1, str, len);
 }
 
-int		errnum(int index, char **argv)
+void    ft_puterr(char *str)
 {
-	if (errno != 0)
-	{
-		ft_putstr(argv[0]);
-		ft_putstr(": ");
-		ft_putstr(argv[index]);
-		ft_putstr(": ");
-		if (errno == 9)
-			ft_putstr("Bad file number\n");
-		if (errno == 13)
-			ft_putstr("Permission denied\n");
-		if (errno == 21)
-			ft_putstr("Is a directory\n");
-		return (1);
-	}
-	else
-		return (0);
+        int     len;
+
+        len = 0;
+        while (str[len])
+                len++;
+        write(2, str, len);
 }
 
-int		main(int argc, char **argv)
+void	ft_print_err(int index, char **argv)
+{
+	ft_puterr("ft_cat: ");
+	ft_putstr(argv[index]);
+	ft_putstr(": No such file or directory\n");
+}
+
+int	main(int argc, char **argv)
 {
 	int		i;
 	int		fd;
@@ -56,18 +53,20 @@ int		main(int argc, char **argv)
 	errno = 0;
 	if (argc < 2)
 		return (0);
-	
 	while (argv[i])
 	{
-		fd = open(argv[i], 0x0000 | 0x0001);
-		while ((ret = read(fd, buf, BUF_SIZE) && errno == 0))
-			ft_putstr(buf);
-		if (errno != 0)
-			errnum(i, argv);
-		buf[ret] = '\0';
+		errno = 0;
+		fd = open(argv[i], 0x0000);
+		if (fd >= 0)
+		{
+			while ((ret = read(fd, buf, BUF_SIZE) && errno == 0))
+				ft_putstr(buf);
+		}
+		else
+		  ft_print_err(i, argv);
+		//buf[ret] = '\0';
 		close(fd);
 		i++;
 	}
-	printf("\n\nNumero de l'erreur: %i\n", errno);	
 	return (0);
 }
