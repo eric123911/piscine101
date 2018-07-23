@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   main.c                                           .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: bjuarez <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/07/23 15:22:51 by bjuarez      #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/23 16:50:22 by bjuarez     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
+#include "../include/ft.h"
+#include <stdio.h>
+
+void	ft_count_line(char *str)
+{
+  printf("%s", str);
+}
+
+char	**ft_return_tab(int i)
+{
+  int ret;
+  char buff[BUFF_SIZE];
+  char **tab;
+  char *tab_out;
+
+  i = 0;
+  while ((ret = read(0, buff, BUFF_SIZE)))
+    {
+      buff[ret] = '\0';
+      tab_out = ft_realloc(sizeof(char), get_size(tab_out));
+      tab_out[i] = buff;
+      i++;
+    }
+  ft_count_line(tab_out);
+  return (tab);
+}
+
+int	main(int ac, char **av)
+{
+  int i;
+  char **tab;
+
+  i = 0;
+  if (ac == 1)
+    {
+      tab = ft_return_tab(i);
+      i = 0;
+      while (tab[i])
+	{
+	  printf("%s", tab[i]);
+	  i++;
+	}
+    }
+}

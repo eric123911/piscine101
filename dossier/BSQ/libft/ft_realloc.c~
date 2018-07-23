@@ -1,0 +1,58 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_realloc.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/07/23 15:39:28 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/23 18:29:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void	*ft_realloc(int *ptr)
+{
+  int	i;
+  void	*newptr;
+
+  for (i=0; ptr == NULL; ptr++, i++);
+  newptr = (void*)malloc(sizeof(int) * i);
+  free(ptr);
+  return (newptr);
+}
+
+int	main(void)
+{
+  int	i=0, min=-5, max=30, diff;
+  int	*tab;
+  int	*bite;
+
+  diff = max - min;
+  if (diff < 0)
+    diff *= -1;
+  bite = malloc(sizeof(int) * (diff));
+  tab = ft_realloc(bite);
+    while (i <= diff)
+    {
+      tab[i] = max;
+      if (max > min)
+	max--;
+      else
+	max++;
+      i++;
+    }
+    i--;
+  while (i >= 0)
+    {
+      if (i != diff)
+	printf("%d ", tab[i]);
+      else
+	printf("%d\n", i);
+      i--;
+    }
+  return (0);
+}
