@@ -6,45 +6,56 @@
 /*   By: bjuarez <bjuarez@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 19:36:03 by bjuarez      #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 19:36:24 by bjuarez     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 22:16:49 by bjuarez     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_get_next_line.h"
+#include "../include/ft.h"
 
-int	error_c(int fd, char **str, char **line)
+char				*read_line(char *str, int fd)
 {
-	fd (fd == -1 || line == NULL)
-		return (-1);
-	if (!*str)
-	{
-		if (!(*str = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-			return (-1);
-	}
-	return (0);
-}
-
-char	*read_line(char *str, int fd)
-{
-	char buff[BUFF_SIZE + 1];
-	int ret;
+	char			buff[BUFF_SIZE + 1];
+	int				ret;
 
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		buff[ret] = '\0';
+	  	buff[ret] = '\0';
 		str = ft_strcat(str, buff);
 	}
+	*str++ = '\0';
 	return (str);
 }
 
-char	**ft_get_next_line(int fd)
+char				*ft_get_next_line(int fd)
 {
-	static char *str;
-	char **tab;
+	static char		*str;
 
-	if (error_c(fd, &str, line) == -1)
-		return (-1);
+	str = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if (fd == -1)
+		return (NULL);
 	str = read_line(str, fd);
-	tab = whitespaces(str);
+	return (str);
 }
+
+/*char    *read_line(char *str, int fd)
+{
+  char  buff[BUFF_SIZE];
+
+  while (read(fd, buff, BUFF_SIZE))
+    str = ft_strcat(str, buff);
+  *str++ = '\0';
+  return (str);
+}
+
+char    *ft_get_next_line(int fd)
+{
+  char             *str;
+
+  str = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+  if (fd < 0)
+    return (NULL);
+  str = read_line(str, fd);
+  //tab = ft_split_backslash_n(str, 0);
+  return (str);
+}*/
