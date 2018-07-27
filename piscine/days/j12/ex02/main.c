@@ -1,37 +1,52 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/19 09:33:49 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/19 19:47:59 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "main.h"
 
-int			ft_atoi(char *str)
+void	ft_head(char *str)
 {
-	unsigned int	sign;
-	int		nb;
-
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
+	write(1, "==> ", 4);
+	write(1, str, ft_strlen(str));
+	write(1, " <==\n", 5);
 }
 
-int			main(int ac, char **av)
+int	ft_tail(char **av)
 {
-	if (ac != 2)
+	int	i;
+
+	return (i);
+}
+
+int		main(int ac, char **av)
+{
+	int		i;
+	int		fd;
+	int		ret;
+	char	buf[BUF_SIZE];
+
+	i = 1;
+	if (ac < 2)
 		return (0);
-	printf("%i\n", ft_atoi(av[1]));
+	while (av[i])
+	{
+		errno = 0;
+		fd = open(av[i], 0x0000);
+		if (fd >= 0)
+		{
+			while ((ret = read(fd, buf, BUF_SIZE)))
+				printf("%s", buf);
+		}
+		i++;
+	}
 	return (0);
 }

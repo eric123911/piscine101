@@ -1,37 +1,45 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   print.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/21 23:03:05 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/22 03:30:48 by wsayad      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "main.h"
 
-int			ft_atoi(char *str)
+void	ft_putchar(char c)
 {
-	unsigned int	sign;
-	int		nb;
-
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
+	write(1, &c, 1);
 }
 
-int			main(int ac, char **av)
+void	ft_putstr(char *str)
 {
-	if (ac != 2)
-		return (0);
-	printf("%i\n", ft_atoi(av[1]));
-	return (0);
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	write(1, str, i);
+}
+
+void	ft_putnbr(int nb)
+{
+	if (nb < 0)
+	{
+		nb *= -1;
+		ft_putchar('-');
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+		ft_putchar(nb % 10 + '0');
+	}
+	else
+		ft_putchar(nb % 10 + '0');
 }

@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   rush-0.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: wsayad <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/22 18:55:43 by wsayad       #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/22 18:59:05 by wsayad      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int			ft_atoi(char *str)
-{
-	unsigned int	sign;
-	int		nb;
-
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
-}
+#include "rush.h"
 
 int			main(int ac, char **av)
 {
-	if (ac != 2)
+	if (ac != 3)
 		return (0);
-	printf("%i\n", ft_atoi(av[1]));
+	rush(ft_atoi(av[1]), ft_atoi(av[2]));
 	return (0);
 }

@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   ft_list.h                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/17 09:45:09 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/18 10:54:21 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef FT_LIST_H
+# define FT_LIST_H
+# include <stdlib.h>
 
-int			ft_atoi(char *str)
+typedef struct		s_list
 {
-	unsigned int	sign;
-	int		nb;
+	struct s_list	*next;
+	void			*data;
+}					t_list;
 
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
-}
-
-int			main(int ac, char **av)
-{
-	if (ac != 2)
-		return (0);
-	printf("%i\n", ft_atoi(av[1]));
-	return (0);
-}
+#endif

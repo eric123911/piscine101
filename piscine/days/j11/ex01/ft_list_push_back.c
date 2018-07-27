@@ -1,37 +1,45 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   ft_list_push_back.c                              .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/17 17:11:51 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/17 19:36:20 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
-
 #include <stdio.h>
+#include "ft_list.h"
 
-int			ft_atoi(char *str)
+t_list		*ft
+
+void		ft_list_push_back(t_list **begin_list, void *data)
 {
-	unsigned int	sign;
-	int		nb;
+	t_list	tmp;
 
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
+	tmp = **begin_list;
+	*begin_list = ft_create_elem(data);
+	while (tmp)
+		tmp = tmp->next;
+	tmp->next = ft_create_elem(data);
+	//tmp = NULL;
 }
 
-int			main(int ac, char **av)
+
+
+int			main(void)
 {
-	if (ac != 2)
-		return (0);
-	printf("%i\n", ft_atoi(av[1]));
+	t_list *list;
+
+	list = NULL;
+	ft_list_push_back(&list, "1234");
+
+	while (list->next)
+	{
+		printf("%s\n", list->data);
+		list = list->next;
+	}
 	return (0);
 }

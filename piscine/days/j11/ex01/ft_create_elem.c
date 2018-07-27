@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   ft_create_elem.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/17 17:07:00 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/17 17:17:58 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_list.h"
 
-int			ft_atoi(char *str)
+t_list	*ft_create_elem(void *data)
 {
-	unsigned int	sign;
-	int		nb;
+	t_list	*tmp;
 
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
-}
-
-int			main(int ac, char **av)
-{
-	if (ac != 2)
-		return (0);
-	printf("%i\n", ft_atoi(av[1]));
-	return (0);
+	tmp = malloc(sizeof(t_list));
+	if (tmp)
+	{
+		tmp->data = data;
+		tmp->next = NULL;
+	}
+	return (tmp);
 }

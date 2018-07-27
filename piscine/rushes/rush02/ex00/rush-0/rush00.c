@@ -1,37 +1,47 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_atoi.c                                        .::    .:/ .      .::   */
+/*   rush00.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/21 10:46:31 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/21 17:07:28 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "rush.h"
 
-int			ft_atoi(char *str)
+void	ft_print(char a, char b, char c, int x)
 {
-	unsigned int	sign;
-	int		nb;
+	int i_x;
 
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
+	i_x = 0;
+	while (i_x++ < x)
+	{
+		if (i_x == 1)
+			ft_putchar(a);
+		else if (i_x != x)
+			ft_putchar(b);
+		else
+			ft_putchar(c);
+	}
+	ft_putchar('\n');
 }
 
-int			main(int ac, char **av)
+void	rush(int x, int y)
 {
-	if (ac != 2)
-		return (0);
-	printf("%i\n", ft_atoi(av[1]));
-	return (0);
+	int i_y;
+
+	i_y = 0;
+	while (i_y++ < y)
+	{
+		if (i_y == 1)
+			ft_print('o', '-', 'o', x);
+		else if (i_y != y)
+			ft_print('|', ' ', '|', x);
+		else
+			ft_print('o', '-', 'o', x);
+	}
 }

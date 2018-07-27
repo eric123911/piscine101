@@ -3,35 +3,35 @@
 /*                                                              /             */
 /*   ft_atoi.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: eschnell <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/09 09:44:32 by eschnell     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/09 11:29:15 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-int			ft_atoi(char *str)
+int		ft_atoi(char *str)
 {
-	unsigned int	sign;
-	int		nb;
+	int	i;
+	int	nb;
+	int	sign;
 
+	i = 0;
 	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
-}
-
-int			main(int ac, char **av)
-{
-	if (ac != 2)
-		return (0);
-	printf("%i\n", ft_atoi(av[1]));
-	return (0);
+	sign = 0;
+	while (str[i] < 33)
+		i++;
+	if (str[i] == '-')
+		sign = 1;
+	i++;
+	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	{
+		nb = nb * 10 + str[i] - '0';
+		i++;
+	}
+	if (sign == 1)
+		return (-nb);
+	else
+		return (nb);
 }

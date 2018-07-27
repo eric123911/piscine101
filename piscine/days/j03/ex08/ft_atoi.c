@@ -3,35 +3,61 @@
 /*                                                              /             */
 /*   ft_atoi.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: eschnell <eschnell@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: eschnell <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/05 17:24:03 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/27 08:44:29 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/07 22:35:13 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int			ft_atoi(char *str)
+int			atoi_sign(char *str)
 {
-	unsigned int	sign;
-	int		nb;
+	int		i;
+	int		s;
 
-	nb = 0;
-	while (*str < 33)
-		str++;
-	sign = *str == '-' ? 1 : 0;
-	*str == '-' || *str == '+' ? str++ : 0;
-	while (*str >= '0' && *str <= '9')
-	  nb = nb * 10 + *str - '0', str++;
-	return (sign ? -nb : nb);
+	i = 0;
+	s = 1;
+	while (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			s *= -1;
+	}
+	return (s);
 }
 
-int			main(int ac, char **av)
+int					ft_atoi(char *str)
 {
-	if (ac != 2)
+	int				i;
+	int				sign;
+	unsigned int	nb_total;
+
+	i = 0;
+	nb_total = 0;
+	sign = atoi_sign(str);
+	while (str[i] < 33)
+		i++;
+	while (str[i])
+	{
+		if (str[i] > 47 && str[i] < 58)
+			nb_total = nb_total * 10 + (str[i] - 48);
+		else if (str[i] != '+' || str[i] != '-')
+			while (str[i])
+				i++;
+		i++;
+	}
+	/*
+	if ((nb_total * sign < -2147483648) || ((nb_total * sign) > 2147483647))
 		return (0);
-	printf("%i\n", ft_atoi(av[1]));
+	else
+	*/
+	return (nb_total * sign);
+}
+
+int					main()
+{
+	printf("%i", ft_atoi("+++--+-1"));
 	return (0);
 }
