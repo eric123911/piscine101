@@ -6,20 +6,27 @@
 /*   By: eschnell <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/04 14:48:34 by eschnell     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/05 14:39:35 by eschnell    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/08/09 22:30:51 by eschnell    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-void	ft_putchar(char c);
-
 void	ft_putnbr(int nb)
 {
+	int	f;
+
+	f = 0;
+	if (nb == -2147483648)
+	{
+	  nb %= 1000000000;
+	  f = 1;
+        }
 	if (nb < 0)
 	{
 		ft_putchar('-');
-		nb = nb * -1;
+		nb *= -1;
 	}
+	(f == 1) ? ft_putchar('2'), f = 0 : 0;
 	if (nb >= 10)
 	{
 		ft_putnbr(nb / 10);
