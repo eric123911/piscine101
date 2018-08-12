@@ -1,13 +1,14 @@
+NAME = ft_hexdump
 
-NAME = ft_tail
+INC = ./includes/
 
-SRC = main.c utils.c
+SRC = $(shell find . -maxdepth 1 -name "*.c")
 
 
 all : $(NAME)
 
 $(NAME) :
-		gcc -Wall -Wextra -Werror -o $(NAME) $(SRC)
+		gcc -Wall -Wextra -Werror -I$(INC) -o $(NAME) $(SRC)
 
 clean :
 		rm -f *.o

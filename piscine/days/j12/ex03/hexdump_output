@@ -1,0 +1,15 @@
+|NAME = ft_hexdum|
+|p..INC = ./inclu|
+|des/..SRC = $(sh|
+|ell find . -maxd|
+|epth 1 -name "*.|
+|c")...all : $(NA|
+|ME)..$(NAME) :..|
+|.gcc -Wall -Wext|
+|ra -Werror -I$(I|
+|NC) -o $(NAME) $|
+|(SRC)..clean :..|
+|.rm -f *.o..fcle|
+|an : clean...rm |
+|-f $(NAME)..re :|
+| fclean all.|
