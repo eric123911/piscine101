@@ -1,31 +1,96 @@
 #include "hexdump.h"
 
-void	print_rcol(char *fname)
-{
-	int	c;
-	int     fd;
-        int     ret;
-        char    buf[BUF_SIZE + 1];
+char	*g_fn;
 
-	c = 0;
-	fd = open(fname, O_RDONLY);
+void	print_mcol(char c)
+{
+	ft_putstr(atohex(c));
+}
+
+void	print_rcol_pad(int i)
+{
+	int	j;
+  
+	j = i;
+	while (i % 16 != 15)
+	{
+		if (i % 16 == 7)
+	  		ft_putstr(" ");
+		ft_putstr("   ");
+		i++;
+	}
+	if (j % 16 != 15)
+	{
+		j = i;
+		ft_putstr(" ");
+		print_rcol(j);
+		print_rcol(14);
+	}
+}
+
+void	print_rcol(int i)
+{
+	int	fd;
+	int	ret;
+	char	buf[BUF_SIZE];
+	int	j;
+	int	k;
+
+	j = i - 15;
+	k = 0;
+	fd = open(g_fn, O_RDONLY);
 	if (fd >= 0)
 	{
 		while ((ret = read(fd, buf, BUF_SIZE)))
 		{
-			if (c % 16 == 0)
-				ft_putstr("|");
-			if (ft_char_is_printable(buf[0]) == 0)
-			  ft_putstr(".");
-			else
-			  ft_putstr(buf);
-			if (c % 16 == 15)
-				ft_putstr("|\n");
-			c++;
+			if (j == -1)
+			{
+			  ft_putstr("|\n");
+			  close(fd);
+			  return ;
+			}
+			if (j <= i && k >= j)
+			{
+				if (j % 16 == 0)
+				  ft_putstr("|");
+				(ft_char_is_printable(buf[0]) == 0) ? ft_putstr(".") : ft_putstr(buf);
+				if (j % 16 == 15)
+				  ft_putstr("|\n");
+				j++;
+			}
+			k++;
 		}
-		if (c % 16 != 15)
-		  ft_putstr(|);
-		buf[ret] = '\0';
 		close(fd);
 	}
+}
+
+void	print_all(char *filename)
+{
+  int	i;
+  int	fd;
+  int	ret;
+  char	buf[BUF_SIZE];
+
+  i = 0;
+  g_fn = filename;
+  fd = open(g_fn, O_RDONLY);
+  if (fd >= 0)
+  {
+  	while ((ret = read(fd, buf, BUF_SIZE)))
+	{
+		print_mcol(buf[0]);
+		if (i % 16 == 15)
+		{
+			ft_putstr("  ");
+			print_rcol(i);
+		}
+		else if (i % 16 == 7)
+			ft_putstr("  ");
+		else
+			ft_putstr(" ");
+		i++;
+	}
+	print_rcol_pad(--i);
+	close(fd);
+  }
 }

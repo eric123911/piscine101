@@ -10,11 +10,16 @@
 # define BUF_SIZE 1
 
 // Utils functions declaration
+int	ft_strlen(char *str);
 void	ft_putstr(char *str);
 int	ft_char_is_printable(char c);
 char	*atohex(int nb);
 
 // Print functions declaration
-void	print_rcol(char *fname);
+//void	
+void	print_mcol(char c);
+void	print_rcol_pad(int i);
+void	print_rcol(int i);
+void	print_all(char *filename);
 
 #endif
