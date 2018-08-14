@@ -2,9 +2,16 @@
 
 char	*g_fn;
 
-void	print_mcol(char c)
+void	print_lcol(int i)
 {
-	ft_putstr(atohex(c));
+	int	j;
+
+	j = 6;
+	i / 256 > 0 ? j = j - hexlen(i) + 2 : 0;
+
+	while (j-- > 0)
+		ft_putstr("0");
+	itoh(i);
 }
 
 void	print_rcol_pad(int i)
@@ -14,8 +21,7 @@ void	print_rcol_pad(int i)
 	j = i;
 	while (i % 16 != 15)
 	{
-		if (i % 16 == 7)
-	  		ft_putstr(" ");
+		i % 16 == 7 ? ft_putstr(" ") : 0;
 		ft_putstr("   ");
 		i++;
 	}
@@ -51,11 +57,9 @@ void	print_rcol(int i)
 			}
 			if (j <= i && k >= j)
 			{
-				if (j % 16 == 0)
-				  ft_putstr("|");
-				(ft_char_is_printable(buf[0]) == 0) ? ft_putstr(".") : ft_putstr(buf);
-				if (j % 16 == 15)
-				  ft_putstr("|\n");
+				j % 16 == 0 ? ft_putstr("|") : 0;
+				ft_char_is_printable(buf[0]) == 0 ? ft_putstr(".") : ft_putstr(buf);
+				j % 16 == 15 ? ft_putstr("|\n") : 0;
 				j++;
 			}
 			k++;
@@ -78,7 +82,12 @@ void	print_all(char *filename)
   {
   	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
-		print_mcol(buf[0]);
+		if (i % 16 == 0)
+		{
+			print_lcol(i);
+			ft_putstr("  ");
+		}
+		itoh(buf[0]);
 		if (i % 16 == 15)
 		{
 			ft_putstr("  ");

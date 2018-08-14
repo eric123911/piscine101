@@ -8,8 +8,5 @@ int	main(int ac, char **av)
 	// Hexdump Test
 	print_all(av[1]);
 
-	// atohex Test
-	//printf("%s", atohex(av[1][0]));
-	
 	return (0);
 }

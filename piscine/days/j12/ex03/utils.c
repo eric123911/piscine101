@@ -2,24 +2,6 @@
 
 char	g_hbase[16] = "0123456789abcdef";
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*str)
-	{
-		i++;
-		str++;
-	}
-	return (i);
-}
-
-void	ft_putstr(char *str)
-{
-	write(1, str, ft_strlen(str));
-}
-
 int	ft_char_is_printable(char c)
 {
 	if (c < 32 || c == 127)
@@ -28,29 +10,56 @@ int	ft_char_is_printable(char c)
 		return (1);
 }
 
-char	*atohex(int nb)
+int	hexlen(int nb)
 {
-	int	i;
+    	int	i;
+ 
+	i = 1;
+	while (nb != 0)
+	{
+		nb /= 16;
+		i++;
+	}
+	return (--i);
+}
+
+void	itoh(int nb)
+{
+  	int	i;
  	int	st;
 	char	*hex;
 
-	i = 0;
+	i = 1;
 	st = nb;
-	hex = malloc(sizeof(char) * 3);
+	while (nb != 0)
+	{
+		nb /= 256;
+		i++;
+	}
+	hex = malloc(sizeof(char) * (i + 1));
+	i = 0;
+	nb = st;
+	if (nb == 0)
+	{
+		hex[i] = '0';
+		hex[i + 1] = '0';
+		i += 2;
+	}
 	while (nb != 0)
 	{
 		if (nb > 15)
-			hex[i] = g_hbase[nb / 16];
+			hex[i] = g_hbase[nb % 16];
 		else if (st == nb && nb <= 15)
 		{
 			hex[i] = '0';
 			hex[++i] = g_hbase[nb % 16];
+			i++;
 		}
 		else
-			hex[i] = g_hbase[st % 16];
+			hex[i] = g_hbase[nb];
 		nb /= 16;
 		i++;
 	}
 	hex[i] = '\0';
-	return (hex);
+	ft_putstr(ft_strrev(hex));
 }

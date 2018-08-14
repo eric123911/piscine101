@@ -9,15 +9,19 @@
 # include <stdio.h>
 # define BUF_SIZE 1
 
-// Utils functions declaration
+// Str manip.
+void	ft_putchar(char c);
 int	ft_strlen(char *str);
 void	ft_putstr(char *str);
+char	*ft_strrev(char *str);
+
+// Utils functions declaration
 int	ft_char_is_printable(char c);
-char	*atohex(int nb);
+int	hexlen(int nb);
+void	itoh(int nb);
 
 // Print functions declaration
-//void	
-void	print_mcol(char c);
+void	print_lcol(int i);
 void	print_rcol_pad(int i);
 void	print_rcol(int i);
 void	print_all(char *filename);
