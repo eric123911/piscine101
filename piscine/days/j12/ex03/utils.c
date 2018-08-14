@@ -23,43 +23,39 @@ int	hexlen(int nb)
 	return (--i);
 }
 
+char	*itoh_putbase(int nb, int i, char *ret)
+{
+ 	if (nb > 15)
+		ret[i] = g_hbase[nb % 16];
+	else
+		ret[i] = g_hbase[nb];
+	return (ret);
+}
+
 void	itoh(int nb)
 {
   	int	i;
- 	int	st;
 	char	*hex;
 
-	i = 1;
-	st = nb;
-	while (nb != 0)
-	{
-		nb /= 256;
-		i++;
-	}
-	hex = malloc(sizeof(char) * (i + 1));
+	i = hexlen(nb) + 1;
+	hex = malloc(sizeof(char) * i);
 	i = 0;
-	nb = st;
 	if (nb == 0)
+		while (i < 2)
+			hex[i++] = '0';
+	if (nb <= 15 && nb != 0)
 	{
 		hex[i] = '0';
-		hex[i + 1] = '0';
-		i += 2;
+		hex[++i] = g_hbase[nb % 16];
+		i++;
+		nb /= 16;
 	}
 	while (nb != 0)
 	{
-		if (nb > 15)
-			hex[i] = g_hbase[nb % 16];
-		else if (st == nb && nb <= 15)
-		{
-			hex[i] = '0';
-			hex[++i] = g_hbase[nb % 16];
-			i++;
-		}
-		else
-			hex[i] = g_hbase[nb];
+		hex = itoh_putbase(nb, i, hex);
 		nb /= 16;
 		i++;
 	}
-	hex[i] = '\0';
+	hex[++i] = '\0';
 	ft_putstr(ft_strrev(hex));
 }

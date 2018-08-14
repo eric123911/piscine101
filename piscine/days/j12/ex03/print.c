@@ -7,8 +7,7 @@ void	print_lcol(int i)
 	int	j;
 
 	j = 6;
-	i / 256 > 0 ? j = j - hexlen(i) + 2 : 0;
-
+	i / 256 > 0 ? j = j + 2 - hexlen(i) : 0;
 	while (j-- > 0)
 		ft_putstr("0");
 	itoh(i);
@@ -19,9 +18,9 @@ void	print_rcol_pad(int i)
 	int	j;
   
 	j = i;
+	i % 16 < 7 ? ft_putstr(" ") : 0;
 	while (i % 16 != 15)
 	{
-		i % 16 == 7 ? ft_putstr(" ") : 0;
 		ft_putstr("   ");
 		i++;
 	}
@@ -70,36 +69,38 @@ void	print_rcol(int i)
 
 void	print_all(char *filename)
 {
-  int	i;
-  int	fd;
-  int	ret;
-  char	buf[BUF_SIZE];
+  	int	i;
+	int	fd;
+	int	ret;
+	char	buf[BUF_SIZE];
 
-  i = 0;
-  g_fn = filename;
-  fd = open(g_fn, O_RDONLY);
-  if (fd >= 0)
-  {
-  	while ((ret = read(fd, buf, BUF_SIZE)))
+	i = 0;
+	g_fn = filename;
+	fd = open(g_fn, O_RDONLY);
+	if (fd >= 0)
 	{
-		if (i % 16 == 0)
+  		while ((ret = read(fd, buf, BUF_SIZE)))
 		{
-			print_lcol(i);
-			ft_putstr("  ");
+			if (i % 16 == 0)
+			{
+				print_lcol(i);
+				ft_putstr("  ");
+			}
+			itoh(buf[0]);
+			if (i % 16 == 15)
+			{
+				ft_putstr("  ");
+				print_rcol(i);
+			}
+			else if (i % 16 == 7)
+				ft_putstr("  ");
+			else
+				ft_putstr(" ");
+			i++;
 		}
-		itoh(buf[0]);
-		if (i % 16 == 15)
-		{
-			ft_putstr("  ");
-			print_rcol(i);
-		}
-		else if (i % 16 == 7)
-			ft_putstr("  ");
-		else
-			ft_putstr(" ");
-		i++;
+		print_rcol_pad(--i);
+		print_lcol(++i);
+		ft_putstr("\n");
+		close(fd);
 	}
-	print_rcol_pad(--i);
-	close(fd);
-  }
 }

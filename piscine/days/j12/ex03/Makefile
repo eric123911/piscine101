@@ -9,7 +9,6 @@ all : $(NAME)
 
 $(NAME) :
 		gcc -Wall -Wextra -Werror -I$(INC) -o $(NAME) $(SRC)
-
 clean :
 		rm -f *.o
 
