@@ -13,7 +13,7 @@
 
 char	*ft_strrev(char *str)
 {
-	int		c;
+	char		c;
 	int		i;
 	int		j;
 
