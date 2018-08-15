@@ -40,7 +40,7 @@ void	ft_print_err(char *str)
 	len = 0;
 	while (str[len])
 		len++;
-	ft_puterr("ft_cat: ");
+	ft_puterr("cat: ");
 	ft_puterr(str);
 	if (len >= 256)
 	{
@@ -72,11 +72,11 @@ void	ft_read_stdin(void)
 	}
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int		i;
-	int		fd;
-	int		ret;
+	int	i;
+	int	fd;
+	int	ret;
 	char	buf[BUF_SIZE];
 
 	i = 1;
@@ -95,7 +95,7 @@ int		main(int argc, char **argv)
 		}
 		else
 			ft_print_err(argv[i]);
-		buf[ret] = '\0';
+		fd >= 0 ? buf[ret] = '\0' : 0;
 		i++;
 	}
 	return (0);
