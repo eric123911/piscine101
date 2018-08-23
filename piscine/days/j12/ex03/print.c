@@ -69,7 +69,7 @@ void	print_rcol(int i)
 
 void	print_all(char *filename)
 {
-  	int	i;
+	int	i;
 	int	fd;
 	int	ret;
 	char	buf[BUF_SIZE];
