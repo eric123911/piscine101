@@ -61,18 +61,12 @@ int		main(int argc, char **argv)
 	else
 	{
 		fd = open(argv[1], 0x0000);
-		if (fd == -1)
+		if (fd >= 0)
 		{
-			ft_putstr("open() error\n");
-			return (1);
-		}
-		while ((ret = read(fd, buf, BUF_SIZE)))
-			ft_putstr(buf);
-		buf[ret] = '\0';
-		if (close(fd) == -1)
-		{
-			ft_putstr("close() error\n");
-			return (1);
+			while ((ret = read(fd, buf, BUF_SIZE)))
+				ft_putstr(buf);
+			buf[ret] = '\0';
+			close(fd);
 		}
 		return (0);
 	}
