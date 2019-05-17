@@ -45,8 +45,8 @@ void	itoh(int nb)
 			hex[i++] = '0';
 	if (nb <= 15 && nb != 0)
 	{
-		hex[i] = '0';
-		hex[++i] = g_hbase[nb % 16];
+		hex[i] = g_hbase[nb % 16];
+		hex[++i] = '0';
 		i++;
 		nb /= 16;
 	}
